@@ -58,6 +58,9 @@ ul, li, h2, h1 {
 .locations h4, .amenities h4 {
     margin: .35em 0 0 30px;
     font-weight: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /* State Name */
