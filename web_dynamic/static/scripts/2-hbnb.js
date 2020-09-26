@@ -11,8 +11,8 @@ $(document).ready(() => {
     }
   });
 
-  $.getJSON('http://0.0.0.0:5001/api/v1/status/', function (data) {
-    if (data.status === 'Ok') {
+  $.getJSON('http://localhost:5001/api/v1/status/', function (data) {
+    if (data.status === 'OK') {
       if (!$('DIV#api_status').hasClass()) {
 	$('DIV#api_status').addClass('available');
       }
