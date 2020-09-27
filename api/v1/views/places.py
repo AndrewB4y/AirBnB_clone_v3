@@ -124,57 +124,48 @@ def places_search():
     Retrieves all Place objects depending of the JSON in the body
     of the request
     """
+    search_parms = request.get_json()
+    hbnb_places = storage.all(Place).values()  # All hbnb Place objects
+    if search_parms is None:
+        abort(400, {'Not a JSON'})
+    if len(search_parms) == 0:
+        return jsonify([place.to_dict() for place in hbnb_places])
 
-    if request.get_json() is None:
-        abort(400, description="Not a JSON")
+    states = search_parms.get('states')
+    cities = search_parms.get('cities')
+    amenities = search_parms.get('amenities')
+    if not states and not cities and not amenities:
+        return jsonify([place.to_dict() for place in hbnb_places])
 
-    data = request.get_json()
-
-    if data and len(data):
-        states = data.get('states', None)
-        cities = data.get('cities', None)
-        amenities = data.get('amenities', None)
-
-    if not data or not len(data) or (
-            not states and
-            not cities and
-            not amenities):
-        places = storage.all(Place).values()
-        list_places = []
-        for place in places:
-            list_places.append(place.to_dict())
-        return jsonify(list_places)
-
-    list_places = []
+    state_cities = []  #  Stores cities for each state ID
+    all_state_places = []  #  Stores all places in a state ID
     if states:
-        states_obj = [storage.get(State, s_id) for s_id in states]
-        for state in states_obj:
+        for id in states:
+            state = storage.get(State, id)
             if state:
-                for city in state.cities:
-                    if city:
-                        for place in city.places:
-                            list_places.append(place)
+                state_cities.extend([city for city in state.cities])
+        for city in state_cities:
+            for place in city.places:
+                all_state_places.append(place)
 
+    all_city_places = []  #  Stores all places in all cities
     if cities:
-        city_obj = [storage.get(City, c_id) for c_id in cities]
-        for city in city_obj:
+        for id in cities:
+            city = storage.get(City, id)
             if city:
-                for place in city.places:
-                    if place not in list_places:
-                        list_places.append(place)
+                all_city_places.extend([place for place in city.places])
 
+    searched_places = []
     if amenities:
-        if not list_places:
-            list_places = storage.all(Place).values()
-        amenities_obj = [storage.get(Amenity, a_id) for a_id in amenities]
-        list_places = [place for place in list_places
-                       if all([am in place.amenities
-                               for am in amenities_obj])]
-
-    places = []
-    for p in list_places:
-        d = p.to_dict()
-        d.pop('amenities', None)
-        places.append(d)
-
-    return jsonify(places)
+        if cities or states:
+            places_to_search = all_state_places + all_city_places
+        elif not cities and not states:
+            places_to_search = hbnb_places
+        for place in places_to_search:
+            amen_list = [item.id for item in place.amenities]
+            if all(i in amen_list for i in amenities):
+                searched_places.append(place)
+        return jsonify([place.to_dict() for place in searched_places])
+    else:
+        all_places = all_state_places + all_city_places
+        return jsonify([place.to_dict() for place in all_places])

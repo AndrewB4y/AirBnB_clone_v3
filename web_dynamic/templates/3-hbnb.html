@@ -14,7 +14,7 @@
         <!-- Import jQuery -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <!-- JS Scripts -->
-        <script src="../static/scripts/2-hbnb.js?{{ cache_id }}" type="text/javascript"></script>
+        <script src="../static/scripts/3-hbnb.js?{{ cache_id }}" type="text/javascript"></script>
     </head>
     <body>
         <header>
@@ -52,46 +52,7 @@
             </section>
             <section class="places">
                 <h1 class="places-title">Places</h1>
-                {% for place in places %}
-                <article class="place-card">
-                    <div class="place-card__place-name">
-                        <h2>{{ place.name }}</h2>
-                    </div>
-                    <div class="price_by_night">${{ place['price_by_night'] }}</div>
-                    <div class="information">
-                        <div class="max_guest">{{ place.max_guest }} Guest{% if place.max_guest != 1 %}s{% endif %}</div>
-                        <div class="number_rooms">{{ place.number_rooms }} Bedroom{% if place.number_rooms != 1 %}s{% endif %}</div>
-                        <div class="number_bathrooms">{{ place.number_bathrooms }} Bathroom{% if place.number_bathrooms != 1 %}s{% endif %}</div>
-                    </div>
-                    <div class="user">
-                        <span>Owner:</span> {{ place.user.first_name }} {{ place.user.last_name }}
-                    </div>
-                    <div class="description">
-                        <p>{{ place.description|safe }}</p>
-                    </div>
-                    <div class="amenities">
-                        <h2 class="amenities-title">Amenities</h2>
-                        <ul class="amenities-list">
-                            {% for amenity in place.amenities|sort(attribute='name') %}
-                            <li>{{ amenity.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="reviews">
-                        <h2 class="reviews-title">{{ place.reviews|length }} Reviews</h2>
-                        <ul class="reviews-list">
-                            {% for review in place.reviews%}
-                            <li>
-                                <h3 class="reviewer-date">
-                                    From {{ review.user.first_name }} {{ review.user.last_name }} the {{ review.created_at.strftime('%d %B %Y') }}
-                                </h3>
-                                <p class="reviewer-message">{{ review.text|safe }}</p>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </article>
-                {% endfor %}
+                <!-- Places -->
             </section>
         </div>
         <footer>
