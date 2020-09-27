@@ -71,6 +71,25 @@ class BaseModel:
         if save_fs is None:
             if "password" in new_dict:
                 del new_dict["password"]
+    def to_dict(self):
+        """returns a dictionary containing all keys/values of the instance"""
+        new_dict = self.__dict__.copy()
+        if "created_at" in new_dict:
+            new_dict["created_at"] = new_dict["created_at"].strftime(time)
+        if "updated_at" in new_dict:
+            new_dict["updated_at"] = new_dict["updated_at"].strftime(time)
+        new_dict["__class__"] = self.__class__.__name__
+        if "_sa_instance_state" in new_dict:
+            del new_dict["_sa_instance_state"]
+        if models.storage_t == "db" and new_dict.get('password'):
+            del new_dict['password']
+        if self.__class__.__name__ == 'Place':
+            try:
+                del new_dict['amenities']
+            except KeyError as error:
+                pass
+            #  amenities_list = [item.name for item in self.amenities]
+            #  new_dict['amenities'] = amenities_list
         return new_dict
 
     def delete(self):
