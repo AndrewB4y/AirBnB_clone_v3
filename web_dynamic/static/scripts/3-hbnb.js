@@ -51,7 +51,7 @@ $.ajax({
           </div>
           <div class="description">
             <p>${place.description}</p>
-          </div>  
+          </div>
         </article>`);
     });
   }
