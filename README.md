@@ -162,7 +162,7 @@ Joann Vuong
 Jhoan Zamora - [Github](https://github.com/jzamora5) / [Twitter](https://twitter.com/JhoanZamora10)  
 David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave)
 ##### Airbnb v4:
-Andrés Bayona - [Github](https://github.com/AndrewB4y) / [Twitter](https://twitter.com/AndresBayMon)
+Andrés Bayona - [Github](https://github.com/AndrewB4y) / [Twitter](https://twitter.com/AndresBayMon)  
 Tatiana Orejuela Zapata - [Github](https://github.com/tatsOre) / [Twitter](https://twitter.com/TatsInTech)
 
 ## License
