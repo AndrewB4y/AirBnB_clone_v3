@@ -109,12 +109,53 @@
 h2.amenities-title,
 h2.reviews-title {
     font-size: 1.25em;
-    padding-bottom: .5rem;
+    display: inline;
+}
+.amenities > div,
+.reviews > div {
     border-bottom: 1px solid #DDDDDD;
-    margin-bottom: .7rem;
+    padding-bottom: .5rem;
+    margin-bottom: .25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* span to show/hide list*/
+span.show-amenities,
+span.show-reviews {
+    color: gray;
+    cursor: pointer;
+}
+
+span.show-amenities::before,
+span.show-reviews::before {
+    background-image: url('../images/triangle.svg');
+    background-size: 8px 8px;
+    display: inline-block;
+    width: 8px; 
+    height: 8px;
+    content:"";
+    opacity: .25;
+    margin-right: 5px;
+    transform: rotate(-90deg);
+}
+
+span.rotate__icon::before {
+    transform: rotate(0deg);
+}
+
+span.show-amenities:hover,
+span.show-reviews:hover {
+    color: salmon;
 }
 
 /* Styles for Amenities list */
+.amenities-list {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
 .amenities-list li{
     line-height: 1.75em;
     list-style-type: disc;
