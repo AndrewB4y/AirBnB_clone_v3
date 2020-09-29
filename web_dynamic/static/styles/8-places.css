@@ -99,6 +99,7 @@
 /* Extra space between information and user text */
 .place-card div.description {
     margin-top: -5px;
+    line-height: 1.35;
 }
 
 /* Styles for Amenities/Reviews sections */
@@ -151,15 +152,24 @@ span.show-reviews:hover {
 
 /* Styles for Amenities list */
 .amenities-list {
+    padding-top: 10px;
+    padding-left: 10px;
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
 }
 
 .amenities-list li{
-    line-height: 1.75em;
-    list-style-type: disc;
-    list-style-position: inside;
+    line-height: 1.85em;
+    font-size: 0.95em;
+}
+
+.amen-icon {
+    vertical-align: middle;
+    width: 10px;
+    height: 100%;
+    opacity: .55;
+    padding-right: 7px;
 }
 
 /* Styles for Reviews section */
@@ -169,6 +179,7 @@ span.show-reviews:hover {
 
 .reviews .reviewer-message {
     font-size: .9em;
+    line-height: 1.35;
 }
 
 @media screen and (max-width: 540px) {

@@ -4,6 +4,7 @@ $(document).ready(() => {
   const statesID = [];
   const citiesID = [];
   const statesAndCitiesName = [];
+  console.log(icons);
 
   /* Saves/deletes checked/unchecked amenities */
   $('.amenities input[type=checkbox]').click(function () {
@@ -164,7 +165,7 @@ $(document).on('click', 'span.show-amenities', function () {
 function displayAmenity (placeID, amenity) {
   $(`.amenities-list[data-placeID=${placeID}]`).append(`
   <li class="amen_item" data-amenID=${amenity.id} data-amename=${amenity.name}>
-    ${amenity.name}
+    <i class="amen-icon fas fa-${icons[amenity.name]}"></i> ${amenity.name}
   </li>`);
 }
 
